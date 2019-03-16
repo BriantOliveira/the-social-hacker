@@ -14,7 +14,7 @@
  const { Client } = require('pg'); 
 
  /** Imported Routes */
-
+const { verifyAuthentication } = require('./util/middleware');
 
  /** Instantiating main server */
 const app = express();
@@ -46,6 +46,7 @@ sequelize.authenticate()
 
 
 /** Protected routes */
+app.use(verifyAuthentication);
 
 /** Any remaining request with an extension (.js, .css, etc...) send 404 */
 app.use((req, res, next) => {
